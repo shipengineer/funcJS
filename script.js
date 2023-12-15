@@ -76,10 +76,8 @@ function findElementByClass(root, classToFind) {
   searchStatus = null;
   if (root.classList !== undefined) {
     if (root.classList.contains(classToFind)) {
-      console.log('нашел');
       searchStatus = root;
     }
-    console.log(searchStatus);
   }
 
   if (searchStatus === null) {
@@ -94,6 +92,10 @@ function findElementByClass(root, classToFind) {
 
   return searchStatus;
 }
-const root = document.querySelector('div');
-const finded = findElementByClass(root, 'div#17');
-finded.style.color = 'red';
+document.addEventListener('input', (e) => inputHandler(e));
+function inputHandler(e) {
+  document.querySelectorAll('div').forEach((div) => (div.style.color = '#000'));
+  const root = document.querySelector('div');
+  const finded = findElementByClass(root, 'div#' + e.target.value);
+  finded.style.color = 'red';
+}
