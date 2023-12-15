@@ -1,100 +1,99 @@
-// const Person ={
-//     name:'John',
-//     age:'25',
-//     gender:'male',
-//     introduce:function(){
-//         console.log(`My name is `+this.name+'. I\'m '+this.age+ ' years old I ifentify as '+this.gender)
-//     },
-//     changeName: function(newName){
-//         this.name = newName
-//     }
-
-// }
-// Person.changeName('Mike')
-// Person.introduce()
-//__________________________________
-// const Animal = {
-//     name:'',
-//     eat:function(){
-//         console.log(this.name+' is eating');
-//     }
-
-// }
-// const Dog ={
-//     name:'Frank',
-//     bark: function(){
-//         console.log(this.name +' is barking')
-//     }
-
-// }
-// Dog.eat= Animal.eat
-// Dog.eat()
-//__________________________________
-
-// const calculator={
-//     add: function(a,b){
-//         console.log(a+b)
-//     },
-//     substract: function(a,b){
-//         console.log(a-b)
-//     },
-//     multiply:function(a,b){
-//         console.log(a*b)
-//     },
-
-// }
-
-// calculator.add.call(null,5,3)
-// calculator.substract.apply(null,[5,3])
-
-//__________________________________
-
-// class Person  {
-
-//     constructor(name,age){
-//          this.name = name;
-//     this.age = age;
-//     }
-//     introduce(){
-//         console.log(`My name is `+this.name+'. I\'m '+this.age+ ' years old')
-//     }
-// }
-// const person = new Person('John',25);
-// person.introduce()
-
-//__________________________________
-
-// class BankAccount {
-//   bankName = 'CoolBank'
-//   constructor(accountNumber,balance){
-//       this.accountNumber = accountNumber;
-//       this.balance = balance;
-
+//  HW#1
+// 1) Дан массив const arr = [1, 5, 7, 9] с помощью Math.min и spread оператора, найти минимальное число в массиве, решение задание должно состоять из одной строки
+const arr = [1, 5, 7, 9];
+console.log(Math.min(...arr));
+// ______________________________________________________________
+// 2) Напишите функцию createCounter, которая создает счетчик и возвращает объект с двумя методами: increment и decrement. Метод increment должен увеличивать значение счетчика на 1, а метод decrement должен уменьшать значение счетчика на 1. Значение счетчика должно быть доступно только через методы объекта, а не напрямую.
+// class counter {
+//   constructor(initialCounterValue){
+//     this.value = initialCounterValue
 //   }
-//   deposit(amount){
-//       this.balance +=amount;
-//       console.log('Deposited '+amount+' into account '+this.accountNumber+'. New balance: '+this.balance)
+//   increment(){
+//     this.value=this.value+1
 //   };
-//   withdraw(amount){
-//       if(this.balance<amount){
-//           return console.log('Insufficient funds in account '+ this.accountNumber)
-//       }
-//       this.balance -=amount;
-//       console.log('Withdraw '+amount+' from account '+this.accountNumber+'. New balance: '+this.balance)
+//   decrement(){
+//     this.value=this.value-1
 //   };
-
+//   showValue(){
+//     console.log(this.value)
+//   }
 // }
-// const account1 = new BankAccount('1234567890',100);
-// account1.deposit(500);
-// account1.withdraw(200);
-// account1.withdraw(1500);
-//__________________________________
+function createCounter(initialCounterValue) {
+  if (Number.isNaN(Number.isFinite(initialCounterValue))) {
+    return console.log('Not a number');
+  }
+  const counter = {
+    value: initialCounterValue,
 
-function sumDigits(num) {
-  if (num < 10) {
-    return num;
+    increment: function () {
+      this.value = this.value + 1;
+    },
+    decrement: function () {
+      this.value = this.value - 1;
+    },
+    show: function () {
+      console.log(this.value);
+    },
+  };
+  return counter;
+}
+const counter1 = createCounter(1);
+counter1.increment();
+counter1.increment();
+counter1.increment();
+counter1.increment();
+counter1.show();
+// ______________________________________________________________
+// 3) Напишите рекурсивную функцию findElementByClass, которая принимает корневой элемент дерева DOM и название класса в качестве аргументов и возвращает первый найденный элемент с указанным классом в этом дереве.
+//___________
+//создаю дерево
+for (let i = 0; i < 10; i++) {
+  const newSpan = document.createElement('div');
+  newSpan.setAttribute('class', 'div#' + i);
+  newSpan.textContent = 'Это див номер ' + i;
+
+  document.body.appendChild(newSpan);
+}
+document.querySelectorAll('div').forEach((div, index) => {
+  const newSpan = document.createElement('div');
+  newSpan.setAttribute('class', 'div#' + index);
+  newSpan.textContent = 'Это див номер ' + index;
+  newSpan.style.marginLeft = '20px';
+
+  div.appendChild(newSpan);
+});
+document.querySelectorAll('div').forEach((div, index) => {
+  const newSpan = document.createElement('div');
+  newSpan.setAttribute('class', 'div#' + index);
+  newSpan.textContent = 'Это див номер ' + index;
+  newSpan.style.marginLeft = '20px';
+
+  div.appendChild(newSpan);
+});
+
+//Сама фунция
+function findElementByClass(root, classToFind) {
+  searchStatus = null;
+  if (root.classList !== undefined) {
+    if (root.classList.contains(classToFind)) {
+      console.log('нашел');
+      searchStatus = root;
+    }
+    console.log(searchStatus);
   }
 
-  return Math.trunc(num % 10) + sumDigits(Math.trunc(num / 10));
+  if (searchStatus === null) {
+    const childs = root.childNodes;
+    if (childs.length !== 0 && searchStatus === null) {
+      searchStatus = findElementByClass(childs[0], classToFind);
+    }
+    if (root.nextSibling !== null && searchStatus === null) {
+      searchStatus = findElementByClass(root.nextSibling, classToFind);
+    }
+  }
+
+  return searchStatus;
 }
-console.log(sumDigits(123));
+const root = document.querySelector('div');
+const finded = findElementByClass(root, 'div#17');
+finded.style.color = 'red';
