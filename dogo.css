@@ -1,0 +1,9 @@
+body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+img {
+  width: 320px;
+  height: auto;
+}

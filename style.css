@@ -1,0 +1,34 @@
+body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.user-wrap {
+  flex: 1 1 260px;
+  border: grey 2px solid;
+  border-radius: 10px;
+  padding: 5px;
+  background-color: gainsboro;
+}
+.name {
+  border-bottom: 1px solid black;
+}
+.username {
+  font-style: italic;
+}
+
+.address,
+.geo,
+.company {
+  margin-left: 2px;
+  border: grey 2px solid;
+  padding-left: 10px;
+}
+.geo {
+  border-bottom: none;
+  border-right: none;
+}
+.company {
+  border-bottom: none;
+  border-right: none;
+}

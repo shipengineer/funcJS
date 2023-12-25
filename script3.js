@@ -55,3 +55,4 @@ const product2 = new Product('Headphones', 100);
 order.addProduct(product2);
 
 console.log(order.getTotalPrice());
+console.log('END OF LINE #3_____________________________________');
