@@ -28,3 +28,11 @@ class Student {
 }
 const student1 = new Student('John Smith', 16, '10th grade');
 student1.displayInfo();
+
+
+ export  const db = [
+  {
+    "id":1,
+    "key":2
+  }
+]
